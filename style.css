@@ -1,0 +1,15 @@
+
+
+.wrapper {
+    height: 900px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 450px;
+    height: 600px;
+    border: 5px solid rgb(40, 40, 158);
+    border-radius: 10px;
+}
