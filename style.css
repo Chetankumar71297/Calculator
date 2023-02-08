@@ -18,10 +18,14 @@
 
 .display {
     height: 80px;
-    
+    color:rgb(255, 255, 255);
+    font-size: xx-large;
     margin: 10px;
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.74);
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 button {
