@@ -33,3 +33,16 @@ function operate(operator, num1, num2) {
 
     return result
 }
+
+// Function to make display work.
+
+const buttons = document.querySelectorAll("button");
+const buttonsArray = [...buttons];
+buttonsArray.forEach((item) => {
+    item.addEventListener("click", function () {
+      console.log("click");
+    });
+  });
+function display(params) {
+    
+}
