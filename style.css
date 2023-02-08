@@ -1,6 +1,7 @@
 
 
 .wrapper {
+    background-color: antiquewhite;
     height: 900px;
     display: flex;
     justify-content: center;
@@ -8,8 +9,46 @@
 }
 
 .container {
+    background-color: rgb(128, 128, 128);
     width: 450px;
     height: 600px;
     border: 5px solid rgb(40, 40, 158);
     border-radius: 10px;
+}
+
+.display {
+    height: 80px;
+    
+    margin: 10px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.74);
+}
+
+button {
+    font-size: larger;
+    width: 105px;
+    height: 90px;
+    border-radius: 5px;
+}
+
+.keys {
+    display: flex-wrap;
+}
+
+.contents {
+    display: flex;
+    margin-top: 45px;
+    padding: 0px 10px;
+}
+
+button.equalto {
+    height: 270px;
+}
+
+.red {
+    background-color: rgba(255, 0, 0, 0.514);
+}
+
+.green {
+    background-color: rgba(0, 128, 0, 0.712);
 }
