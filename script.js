@@ -38,11 +38,22 @@ function operate(operator, num1, num2) {
 
 const buttons = document.querySelectorAll("button");
 const buttonsArray = [...buttons];
+//const displayElement = document.querySelector(".display"); --> This will also work in combination with line no. 52! 
+const displayElement = document.getElementsByClassName("display");
+
+// Line 45-49 will call display function with innertext of button clicked
 buttonsArray.forEach((item) => {
-    item.addEventListener("click", function () {
-      console.log("click");
-    });
-  });
-function display(params) {
-    
+    item.addEventListener("click", () => {
+    let input = item.innerText;
+    display(input);})
+});
+
+// Line 52-59 will use innertext of button clicked to display it on screen
+function display(buttonText) {
+    console.log(buttonText)
+    if(buttonText !== "←" && buttonText !== "Clear All" && buttonText !== "=") {
+        //displayElement.innerText = buttonText; --> This will also work in combination with line no. 41!
+        [...displayElement][0].innerText = buttonText; // Because getElementsByClassName returns a Nodelist or HTMLCollection which should be converted to array!!
+        //console.log([...displayElement][0].innerText) --> It will work but --> console.log(displayElement.innerText) --> This will not work!
+    }
 }
