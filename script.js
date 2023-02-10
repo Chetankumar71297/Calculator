@@ -5,19 +5,19 @@ let newOperator = "";
 // Functions for all of the basic math operators
 
 function add(num1, num2) {
-    return (parseFloat(num1) + parseFloat(num2)).toFixed(4) // rounding to 4 decimal places
+    return (parseFloat(num1) + parseFloat(num2)).toFixed(1) // rounding to 1 decimal places
 }
 
 function subtract(num1, num2) {
-    return (parseFloat(num1) - parseFloat(num2)).toFixed(4)
+    return (parseFloat(num1) - parseFloat(num2)).toFixed(1)
 }
 
 function multiply(num1, num2) {
-    return (parseFloat(num1) * parseFloat(num2)).toFixed(4)
+    return (parseFloat(num1) * parseFloat(num2)).toFixed(1)
 }
 
 function divide(num1, num2) {
-    return (parseFloat(num1) / parseFloat(num2)).toFixed(4)
+    return (parseFloat(num1) / parseFloat(num2)).toFixed(1)
 }
 
 // Function that takes an operator and 2 numbers as input and then calls one of the above functions on the numbers.
@@ -51,12 +51,9 @@ buttonsArray.forEach((item) => {
     item.addEventListener("click", () => {
     let input = item.innerText;
     display(input);
-    if(["+", "−", "×", "÷"].includes(input)) {
-        //console.log(input)
-        //console.log(["+", "−", "×", "÷"].includes(input));
-        
+    if(["+", "−", "×", "÷", "="].includes(input)) {
         operatorProperties(input);
-    }
+    } 
     })
 });
 
@@ -78,17 +75,21 @@ function operatorProperties(operatorText) {
         //console.log(num1)
     } else {
         num2 = previousDisplayText.slice(num1.length+1);
-        
         let result = equalTo(operator, num1, num2);
-        newOperator = previousDisplayText[previousDisplayText.length-1];
         previousDisplayText = "";
-        console.log(num1)
-        console.log(operator)
-        console.log(num2)
-        num1 = "";
-        display(result + newOperator);
+        if (operatorText !== "=") {
+            newOperator = operatorText; //previousDisplayText[previousDisplayText.length-1];
+            //previousDisplayText = "";
+            //num1 = "";
+            display(result + newOperator);
+            num1 = "";
+            operatorProperties(newOperator);
+        } else {
+            display(result);
+            num1 = "";
+        }
         
-        operatorProperties(newOperator);
+        //operatorProperties(newOperator);
     }
     
     
