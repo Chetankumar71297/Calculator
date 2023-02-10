@@ -1,22 +1,23 @@
 let num1 = "";
 let num2 = "";
 let operator = "";
+let newOperator = "";
 // Functions for all of the basic math operators
 
 function add(num1, num2) {
-    return num1 + num2
+    return (parseFloat(num1) + parseFloat(num2)).toFixed(4) // rounding to 4 decimal places
 }
 
 function subtract(num1, num2) {
-    return num1 - num2
+    return (parseFloat(num1) - parseFloat(num2)).toFixed(4)
 }
 
 function multiply(num1, num2) {
-    return num1 * num2
+    return (parseFloat(num1) * parseFloat(num2)).toFixed(4)
 }
 
 function divide(num1, num2) {
-    return num1 / num2
+    return (parseFloat(num1) / parseFloat(num2)).toFixed(4)
 }
 
 // Function that takes an operator and 2 numbers as input and then calls one of the above functions on the numbers.
@@ -51,10 +52,10 @@ buttonsArray.forEach((item) => {
     let input = item.innerText;
     display(input);
     if(["+", "−", "×", "÷"].includes(input)) {
-        console.log(input)
-        console.log(["+", "−", "×", "÷"].includes(input));
-        operator = previousDisplayText[previousDisplayText.length-1];
-        operatorProperties();
+        //console.log(input)
+        //console.log(["+", "−", "×", "÷"].includes(input));
+        
+        operatorProperties(input);
     }
     })
 });
@@ -70,23 +71,31 @@ function display(buttonText) {
     }
 }
 
-function operatorProperties() {
+function operatorProperties(operatorText) {
     if(!num1) {
-        num1 = parseFloat(previousDisplayText.slice(0, previousDisplayText.length-1));
-        console.log(num1)
+        num1 = previousDisplayText.slice(0, previousDisplayText.length-1);
+        operator = operatorText; // previousDisplayText[previousDisplayText.length-1];
+        //console.log(num1)
     } else {
-        num2 = parseFloat(previousDisplayText.slice(num1.length+1));
+        num2 = previousDisplayText.slice(num1.length+1);
         
-        let result = equalTo();
+        let result = equalTo(operator, num1, num2);
+        newOperator = previousDisplayText[previousDisplayText.length-1];
         previousDisplayText = "";
-        display(result);
+        console.log(num1)
+        console.log(operator)
+        console.log(num2)
+        num1 = "";
+        display(result + newOperator);
+        
+        operatorProperties(newOperator);
     }
     
     
     
 }
 
-function equalTo() {
+function equalTo(operator, num1, num2) {
     if (num1 && num2 && operator) {
         return operate(operator, num1, num2);
     }
