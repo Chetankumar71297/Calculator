@@ -53,7 +53,12 @@ buttonsArray.forEach((item) => {
     display(input);
     if(["+", "−", "×", "÷", "="].includes(input)) {
         operatorProperties(input);
-    } 
+    } else if(input === "Clear All") {
+        previousDisplayText = "";
+        num1 = "";
+        operator = "";
+        display("");
+    }
     })
 });
 
@@ -71,16 +76,13 @@ function display(buttonText) {
 function operatorProperties(operatorText) {
     if(!num1) {
         num1 = previousDisplayText.slice(0, previousDisplayText.length-1);
-        operator = operatorText; // previousDisplayText[previousDisplayText.length-1];
-        //console.log(num1)
+        operator = operatorText;
     } else {
         num2 = previousDisplayText.slice(num1.length+1);
         let result = equalTo(operator, num1, num2);
         previousDisplayText = "";
         if (operatorText !== "=") {
-            newOperator = operatorText; //previousDisplayText[previousDisplayText.length-1];
-            //previousDisplayText = "";
-            //num1 = "";
+            newOperator = operatorText; 
             display(result + newOperator);
             num1 = "";
             operatorProperties(newOperator);
@@ -88,8 +90,6 @@ function operatorProperties(operatorText) {
             display(result);
             num1 = "";
         }
-        
-        //operatorProperties(newOperator);
     }
     
     
