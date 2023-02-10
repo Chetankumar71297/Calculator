@@ -26,9 +26,9 @@ function operate(operator, num1, num2) {
     
     if (operator === "+") {
         result = add(num1, num2)
-    } else if (operator === "-") {
+    } else if (operator === "−") {
         result = subtract(num1, num2)
-    } else if (operator === "*") {
+    } else if (operator === "×") {
         result = multiply(num1, num2)
     } else {
         result = divide(num1, num2)
