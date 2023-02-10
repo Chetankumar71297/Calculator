@@ -1,3 +1,6 @@
+let num1 = "";
+let num2 = "";
+let operator = "";
 // Functions for all of the basic math operators
 
 function add(num1, num2) {
@@ -46,16 +49,45 @@ const displayElement = document.getElementsByClassName("display");
 buttonsArray.forEach((item) => {
     item.addEventListener("click", () => {
     let input = item.innerText;
-    display(input);})
+    display(input);
+    if(["+", "−", "×", "÷"].includes(input)) {
+        console.log(input)
+        console.log(["+", "−", "×", "÷"].includes(input));
+        operator = previousDisplayText[previousDisplayText.length-1];
+        operatorProperties();
+    }
+    })
 });
 
 // Line 52-59 will use innertext of button clicked to display it on screen
 function display(buttonText) {
-    console.log(buttonText)
+    
     if(buttonText !== "←" && buttonText !== "Clear All" && buttonText !== "=") {
         //displayElement.innerText = buttonText; --> This will also work in combination with line no. 41!
         [...displayElement][0].innerText = previousDisplayText + buttonText; // Because getElementsByClassName returns a Nodelist or HTMLCollection which should be converted to array!!
         //console.log([...displayElement][0].innerText) --> It will work but --> console.log(displayElement.innerText) --> This will not work!
         previousDisplayText = [...displayElement][0].innerText;
+    }
+}
+
+function operatorProperties() {
+    if(!num1) {
+        num1 = parseFloat(previousDisplayText.slice(0, previousDisplayText.length-1));
+        console.log(num1)
+    } else {
+        num2 = parseFloat(previousDisplayText.slice(num1.length+1));
+        
+        let result = equalTo();
+        previousDisplayText = "";
+        display(result);
+    }
+    
+    
+    
+}
+
+function equalTo() {
+    if (num1 && num2 && operator) {
+        return operate(operator, num1, num2);
     }
 }
