@@ -109,15 +109,24 @@ function operatorProperties(operatorText) {
     } else {
         num2 = previousDisplayText.slice(num1.length+1);
         let result = equalTo(operator, num1, num2);
-        previousDisplayText = "";
+        //previousDisplayText = "";
         if (operatorText !== "=") {
+            previousDisplayText = "";
             newOperator = operatorText; 
             display(result + newOperator);
             num1 = "";
             operatorProperties(newOperator);
         } else {
-            display(result);
-            num1 = "";
+            if(num1 && num2 && operator) {
+                previousDisplayText = "";
+                display(result);
+                num1 = "";
+            } else {
+                result = previousDisplayText;
+                previousDisplayText = "";
+                display(result);
+            }
+            
         }
     }
 }
