@@ -73,6 +73,9 @@ function display(buttonText) {
         [...displayElement][0].innerText = previousDisplayText + buttonText; // Because getElementsByClassName returns a Nodelist or HTMLCollection which should be converted to array!!
         //console.log([...displayElement][0].innerText) --> It will work but --> console.log(displayElement.innerText) --> This will not work!
         previousDisplayText = [...displayElement][0].innerText;
+    } else if(buttonText === "←") {
+        previousDisplayText = previousDisplayText.slice(0,-1);
+        display("");
     }
 }
 
