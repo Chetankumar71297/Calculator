@@ -61,22 +61,45 @@ buttonsArray.forEach((item) => {
         num1 = "";
         operator = "";
         display("");
+    } else if(input === '.') {
+        displayDecimalSeparator(input);
     }
     })
 });
 
-// Line 52-59 will use innertext of button clicked to display it on screen
+// Line 72-103 will use innertext of button clicked to display it on screen
+
 function display(buttonText) {
     
-    if(buttonText !== "←" && buttonText !== "Clear All" && buttonText !== "=") {
+    if(buttonText !== "←" && buttonText !== "Clear All" && buttonText !== "=" && buttonText !== ".") {
         //displayElement.innerText = buttonText; --> This will also work in combination with line no. 41!
         [...displayElement][0].innerText = previousDisplayText + buttonText; // Because getElementsByClassName returns a Nodelist or HTMLCollection which should be converted to array!!
         //console.log([...displayElement][0].innerText) --> It will work but --> console.log(displayElement.innerText) --> This will not work!
         previousDisplayText = [...displayElement][0].innerText;
     } else if(buttonText === "←") {
-        previousDisplayText = previousDisplayText.slice(0,-1);
+        previousDisplayText = previousDisplayText.slice(0,-1); // It will remove the last character from string!
         display("");
     }
+}
+
+// This function will make sure that decimal is only used once per number!!
+function displayDecimalSeparator(decimalSeparator) {
+    let arrayToBeSearched;
+    let stringToBeSearched;
+    if (!num1) {
+        stringToBeSearched = previousDisplayText;
+        arrayToBeSearched = stringToBeSearched.split("");
+        if(!(arrayToBeSearched.includes(decimalSeparator))) {
+            [...displayElement][0].innerText = previousDisplayText + decimalSeparator;
+        }
+    } else {
+        stringToBeSearched = previousDisplayText.slice(num1.length+1, -1); // If previousDisplayText = "5+55.01" then stringToBeSearched == "55.01"--> after operator string
+        arrayToBeSearched = stringToBeSearched.split("");
+        if(!(arrayToBeSearched.includes(decimalSeparator))) {
+            [...displayElement][0].innerText = previousDisplayText + decimalSeparator;
+        }
+    }
+    previousDisplayText = [...displayElement][0].innerText;
 }
 
 function operatorProperties(operatorText) {
@@ -97,9 +120,6 @@ function operatorProperties(operatorText) {
             num1 = "";
         }
     }
-    
-    
-    
 }
 
 function equalTo(operator, num1, num2) {
