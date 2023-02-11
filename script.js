@@ -17,6 +17,9 @@ function multiply(num1, num2) {
 }
 
 function divide(num1, num2) {
+    if (parseFloat(num2) === 0) {
+        return "You are funny"
+    }
     return (parseFloat(num1) / parseFloat(num2)).toFixed(1)
 }
 
