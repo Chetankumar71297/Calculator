@@ -46,10 +46,10 @@ function operate(operator, num1, num2) {
 let previousDisplayText = ""; // Previous text will get saved in this variable each time when display function will be called!
 const buttons = document.querySelectorAll("button");
 const buttonsArray = [...buttons];
-//const displayElement = document.querySelector(".display"); --> This will also work in combination with line no. 52! 
+//const displayElement = document.querySelector(".display"); --> This will also work in combination with line no. 75! 
 const displayElement = document.getElementsByClassName("display");
 
-// Line 45-49 will call display function with innertext of button clicked
+
 buttonsArray.forEach((item) => {
     item.addEventListener("click", () => {
     let input = item.innerText;
@@ -72,7 +72,7 @@ buttonsArray.forEach((item) => {
 function display(buttonText) {
     
     if(buttonText !== "←" && buttonText !== "Clear All" && buttonText !== "=" && buttonText !== ".") {
-        //displayElement.innerText = buttonText; --> This will also work in combination with line no. 41!
+        //displayElement.innerText = buttonText; --> This will also work in combination with line no. 49!
         [...displayElement][0].innerText = previousDisplayText + buttonText; // Because getElementsByClassName returns a Nodelist or HTMLCollection which should be converted to array!!
         //console.log([...displayElement][0].innerText) --> It will work but --> console.log(displayElement.innerText) --> This will not work!
         previousDisplayText = [...displayElement][0].innerText;
@@ -102,6 +102,8 @@ function displayDecimalSeparator(decimalSeparator) {
     previousDisplayText = [...displayElement][0].innerText;
 }
 
+// This function will be called every time an operator button is clicked
+
 function operatorProperties(operatorText) {
     if(!num1) {
         num1 = previousDisplayText.slice(0, previousDisplayText.length-1);
@@ -109,7 +111,6 @@ function operatorProperties(operatorText) {
     } else {
         num2 = previousDisplayText.slice(num1.length+1);
         let result = equalTo(operator, num1, num2);
-        //previousDisplayText = "";
         if (operatorText !== "=") {
             previousDisplayText = "";
             newOperator = operatorText; 
